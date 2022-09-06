@@ -1,0 +1,21 @@
+{
+	"data": {
+		"authorizationType": "AzureSubscription",
+		"azureSubscriptionId": "${subscriptionId}",
+		"azureSubscriptionName": "${subscriptionNAME}",
+		"clusterId": "${clusterID}",
+		"namespace": "default",
+		"clusterAdmin": "true"
+	},
+	"name": "${connName}",
+	"type": "kubernetes",
+	"url": "${aksHost}",
+	"description": "azurerm-aks-dev-connection json file with admin priveliage",
+	"authorization": {
+		"parameters": {
+			"azureTenantId": "${tenantID}",
+			"azureEnvironment": "AzureCloud"
+		},
+		"scheme": "Kubernetes"
+	}
+}

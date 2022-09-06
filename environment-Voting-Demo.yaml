@@ -1,0 +1,21 @@
+schema_version: v1.0.0
+environment:
+    name: Env-Voting-Demo
+    description: Voting app infra on Azure
+    revision:
+        type: branch
+        identifier: main
+        repo: https://github.com/ariesyous/azure-int-demo
+        dir: /azure/demo_tf
+        driver: github
+    variables:
+        - key: client_id
+          value: $(ARM_CLIENT_ID)
+          type: tf_var
+        - key: client_secret
+          value: $(ARM_CLIENT_SECRET)
+          type: tf_var
+        - key: location
+          value: eastus
+          type: tf_var
+    tfVersion: 1.1.9

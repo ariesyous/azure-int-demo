@@ -1,0 +1,26 @@
+schema_version: v1.0.0
+deployment:
+    name: WorkerDeployment
+    description: Worker Deployment
+    deploymentConfig:
+        artifact:
+            id: 3e9f0abf-c768-499d-8c46-52455622dc
+            containerImage:
+                reference: v2
+        template:
+            moduleRefId: azure:basic-aks-module@1
+            inputs:
+                cluster: $(cluster)
+                pool_name: Azure-Agents
+                resourceGroup: $(resourceGroup)
+        env:
+            PG_HOST: ${terraform.db_instance_address.value}
+            PG_PASSWORD: ${terraform.postgres_password.value}
+            PG_USERNAME: ${terraform.postgres_user.value}
+            REDIS_HOST: ${terraform.redis_hostname.value}
+            cluster: ${terraform.aks_name.value}
+            resourceGroup: ${terraform.aks_rg.value}
+application:
+    import: app-workerApp.yaml
+environment:
+    import: environment-Voting-Demo.yaml

@@ -1,0 +1,11 @@
+schema_version: v1.0.0
+project:
+    name: Demo
+deployments:
+    - import: deployment-VoteDeployment.yaml
+    - import: deployment-VoteResultDeployment.yaml
+    - import: deployment-WorkerDeployment.yaml
+integrations:
+    - import: integration-worker-integration.yaml
+    - import: integration-vote-integration.yaml
+    - import: integration-result-integration.yaml

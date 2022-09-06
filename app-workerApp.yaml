@@ -1,0 +1,22 @@
+schema_version: v1.0.0
+application:
+    name: workerApp
+    description: constantly monitors the voting status
+    appConfig:
+        version: "1"
+    artifacts:
+        - id: 3e9f0abf-c768-499d-8c46-52455622dc
+          name: Worker_Container_Image
+          containerImage:
+            provider: dockerhub_container_registry
+            host: index.docker.io
+            repo: cldcvr/codepipes-example-worker
+            reference: v2
+        - id: 54f08f64-c555-4dd4-b9ee-5c953d3a3caa
+          name: Github
+          gitCode:
+            type: branch
+            identifier: main
+            repo: https://github.com/cldcvr/codepipes-tutorials
+            dir: voting/worker
+            driver: github

@@ -1,0 +1,22 @@
+schema_version: v1.0.0
+application:
+    name: votingResult
+    description: Vote result application details
+    appConfig:
+        version: "1"
+    artifacts:
+        - id: 3e9f0abf-c768-499d-8c46-23455622dc
+          name: Voting_Result_Container_Image
+          containerImage:
+            provider: dockerhub_container_registry
+            host: index.docker.io
+            repo: cldcvr/codepipes-example-result
+            reference: latest
+        - id: 89b56c99-9325-42b6-8ae3-4820604656c0
+          name: Github
+          gitCode:
+            type: branch
+            identifier: main
+            repo: https://github.com/cldcvr/codepipes-tutorials
+            dir: voting/result
+            driver: github

@@ -1,0 +1,21 @@
+schema_version: v1.0.0
+application:
+    name: votingApp
+    appConfig:
+        version: "1"
+    artifacts:
+        - id: bfe63c47-374b-4862-bb92-6ba780cedfaa
+          name: Github
+          gitCode:
+            type: branch
+            identifier: main
+            repo: https://github.com/cldcvr/codepipes-tutorials
+            dir: voting/vote
+            driver: github
+        - id: 3e9f0abf-c768-499d-8c46-577777222dc
+          name: Voting_Container_Image
+          containerImage:
+            provider: dockerhub_container_registry
+            host: index.docker.io
+            repo: cldcvr/codepipes-example-vote
+            reference: v2

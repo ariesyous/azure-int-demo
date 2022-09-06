@@ -1,0 +1,14 @@
+schema_version: v1.0.0
+integration:
+    name: result-integration
+    inputAppArtifact:
+        id: 89b56c99-9325-42b6-8ae3-4820604656c0
+    outputAppArtifact:
+        id: 3e9f0abf-c768-499d-8c46-23455622dc
+    config:
+        buildPlatform: azure
+    pipeline:
+        - moduleRefId: azure:docker-build-n-push@1
+          inputs:
+application:
+    import: app-votingResult.yaml
