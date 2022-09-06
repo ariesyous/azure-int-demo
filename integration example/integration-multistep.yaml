@@ -1,0 +1,44 @@
+schema_version: v1.0.0
+integration:
+    name: worker-integration
+    inputAppArtifact:
+        id: 54f08f64-c555-4dd4-b9ee-5c953d3a3caa
+    outputAppArtifact:
+        id: 3e9f0abf-c768-499d-8c46-52455622dc
+    config:
+        buildPlatform: azure
+    pipeline:
+        - moduleRefId: azure:java-build@1
+          inputs:
+            pool_name: AppSec Pool
+        - moduleRefId: azure:java-unit-test@1
+          inputs:
+            pool_name: AppSec Pool
+        - moduleRefId: azure:sonatype-nexus-iq@1
+          inputs:
+            application_id: worker
+            nexus_service_connection: Sonatype-Nexus IQ
+            pool_name: AppSec Pool
+        - moduleRefId: azure:fortify-selfhosted@1
+          inputs:
+            CONTROLLER_TOKEN: $(CONTROLLER_TOKEN)
+            CRITICAL_THRESHOLD: "100"
+            FortifyAppName: votingApp
+            FortifyAppVersion: "1"
+            HIGH_THRESHOLD: "100"
+            INSTALLER_PATH: /home/azureuser/fortify/Fortify_SCA_and_Apps_21.1.0_linux_x64.run
+            LICENSE_PATH: /home/azureuser/fortify/fortify.license
+            SSC_URL: http://<IP.ADDRESS.GOES.HERE>:8080/ssc
+            WARNING_THRESHOLD: "100"
+            pool_name: AppSec Pool
+        - moduleRefId: azure:sonar-qube@1
+          inputs:
+            pool_name: AppSec Pool
+            sonar_qube_org: cc
+            sonar_qube_project_key: worker-cc
+            sonar_qube_service_connection: SonarQube
+        - moduleRefId: azure:docker-build-n-push@1
+          inputs:
+            pool_name: AppSec Pool
+application:
+    import: app-workerApp.yaml
